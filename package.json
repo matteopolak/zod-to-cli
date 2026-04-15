@@ -1,6 +1,6 @@
 {
   "name": "zli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Type-safe CLI interfaces from Zod schemas",
   "type": "module",
   "main": "./dist/index.js",
@@ -23,7 +23,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test:run","publish": "npm publish"
+    "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test:run",
+    "publish": "npm publish"
   },
   "keywords": [
     "cli",
