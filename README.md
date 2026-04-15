@@ -20,10 +20,13 @@ const schema = z.object({
     description: 'Your name',
     aliases: ['n'],
   }),
-  verbose: z.boolean().default(false).register(meta, {
-    description: 'Enable verbose output',
-    aliases: ['v'],
-  }),
+  verbose: z
+    .boolean()
+    .default(false)
+    .register(meta, {
+      description: 'Enable verbose output',
+      aliases: ['v'],
+    }),
 });
 
 const args = cli(schema, {
@@ -70,6 +73,7 @@ OPTIONS:
 ## More Examples
 
 See the `examples/` directory for:
+
 - [basic.ts](examples/basic.ts) - flags and options
 - [positional.ts](examples/positional.ts) - positional arguments
 - [subcommands.ts](examples/subcommands.ts) - git-style subcommands
