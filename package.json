@@ -23,7 +23,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test:run","publish": "npm publish"
+    "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test:run"
   },
   "keywords": [
     "cli",
