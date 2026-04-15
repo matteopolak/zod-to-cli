@@ -1,0 +1,58 @@
+{
+  "name": "zli",
+  "version": "0.1.0",
+  "description": "Type-safe CLI interfaces from Zod schemas",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test:run","publish": "npm publish"
+  },
+  "keywords": [
+    "cli",
+    "zod",
+    "typescript",
+    "command-line",
+    "parser",
+    "args"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "eslint": "^10.2.0",
+    "jiti": "^2.6.1",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.58.2",
+    "vite": "^8.0.8",
+    "vitest": "^4.1.4",
+    "zod": "^4.3.6"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
