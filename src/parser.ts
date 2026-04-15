@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import type { CliOptions, ParsedArgs, FlagDefinition, SchemaType } from './types.js';
-import { ErrorFormatter } from './error-formatter.js';
-import { HelpGenerator } from './help-generator.js';
-import { getDef, getCLIMeta } from './types.js';
+import type { CliOptions, ParsedArgs, FlagDefinition, SchemaType } from './types.ts';
+import { ErrorFormatter } from './error-formatter.ts';
+import { HelpGenerator } from './help-generator.ts';
+import { getDef, getCLIMeta } from './types.ts';
 
 export class Parser {
   private schema: SchemaType;

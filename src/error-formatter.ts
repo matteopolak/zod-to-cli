@@ -2,7 +2,11 @@ import pc from 'picocolors';
 import type { z } from 'zod';
 
 export class ErrorFormatter {
-  constructor(private colors = true) {}
+  private colors: boolean;
+
+  constructor(colors = true) {
+    this.colors = colors;
+  }
 
   private color(text: string, colorFn: (s: string) => string): string {
     return this.colors ? colorFn(text) : text;

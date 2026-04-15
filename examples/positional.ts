@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { z, meta, cli } from '../src/index.js';
+import { z, meta, cli } from '../src/index.ts';
 
 // Example with positional arguments
 const schema = z

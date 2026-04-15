@@ -1,13 +1,13 @@
 import pc from 'picocolors';
 import { z } from 'zod';
-import type { FlagDefinition, SchemaType } from './types.js';
-import { getDef, getCLIMeta } from './types.js';
+import type { FlagDefinition, SchemaType } from './types.ts';
+import { getDef, getCLIMeta } from './types.ts';
 
 export class HelpGenerator {
   private colors: boolean;
   private programName: string;
-  private programDescription?: string;
-  private version?: string;
+  private programDescription: string | undefined;
+  private version: string | undefined;
 
   constructor(colors = true, programName = 'cli', programDescription?: string, version?: string) {
     this.colors = colors;
