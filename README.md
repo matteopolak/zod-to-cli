@@ -1,4 +1,4 @@
-# zli
+# zod to cli
 
 Type-safe CLI argument parsing using Zod schemas.
 
@@ -7,13 +7,13 @@ Define your CLI interface with a Zod schema, get back typed arguments. Supports 
 ## Install
 
 ```bash
-npm install zli zod
+pnpm add zod-to-cli zod
 ```
 
 ## Quick Example
 
 ```typescript
-import { z, meta, cli } from 'zli';
+import { z, meta, cli } from 'zod-to-cli';
 
 const schema = z.object({
   name: z.string().register(meta, {

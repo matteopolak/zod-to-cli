@@ -1,5 +1,5 @@
 {
-  "name": "zli",
+  "name": "zod-to-cli",
   "version": "0.1.0",
   "description": "Type-safe CLI interfaces from Zod schemas",
   "type": "module",
