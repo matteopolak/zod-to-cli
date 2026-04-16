@@ -113,4 +113,89 @@ describe('cli parser', () => {
 
     expect(result).toEqual({ count: 10 });
   });
+
+  it('should handle count flag with single occurrence', () => {
+    const schema = z.object({
+      verbose: z
+        .number()
+        .default(0)
+        .register(meta, { aliases: ['v'], count: true }),
+    });
+
+    const result = cli(schema, {
+      argv: ['-v'],
+    });
+
+    expect(result).toEqual({ verbose: 1 });
+  });
+
+  it('should handle count flag with multiple short flags', () => {
+    const schema = z.object({
+      verbose: z
+        .number()
+        .default(0)
+        .register(meta, { aliases: ['v'], count: true }),
+    });
+
+    const result = cli(schema, {
+      argv: ['-vvv'],
+    });
+
+    expect(result).toEqual({ verbose: 3 });
+  });
+
+  it('should handle count flag with mixed occurrences', () => {
+    const schema = z.object({
+      verbose: z
+        .number()
+        .default(0)
+        .register(meta, { aliases: ['v'], count: true }),
+    });
+
+    const result = cli(schema, {
+      argv: ['-v', '--verbose', '-v'],
+    });
+
+    expect(result).toEqual({ verbose: 3 });
+  });
+
+  it('should handle count flag with no occurrences (default)', () => {
+    const schema = z.object({
+      verbose: z
+        .number()
+        .default(0)
+        .register(meta, { aliases: ['v'], count: true }),
+    });
+
+    const result = cli(schema, {
+      argv: [],
+    });
+
+    expect(result).toEqual({ verbose: 0 });
+  });
+
+  it('should coerce numeric array values using z.coerce.number()', () => {
+    const schema = z.object({
+      nums: z.array(z.coerce.number()).register(meta, { aliases: ['n'] }),
+    });
+
+    const result = cli(schema, {
+      argv: ['--nums', '1', '-n', '2', '--nums', '3'],
+    });
+
+    // Values are grouped by key: name values first, then alias values
+    expect(result).toEqual({ nums: [1, 3, 2] });
+  });
+
+  it('should handle mixed numeric array with coerce', () => {
+    const schema = z.object({
+      values: z.array(z.coerce.number()).register(meta, { aliases: ['v'] }),
+    });
+
+    const result = cli(schema, {
+      argv: ['-v', '10', '-v', '20'],
+    });
+
+    expect(result).toEqual({ values: [10, 20] });
+  });
 });

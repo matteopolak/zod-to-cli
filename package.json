@@ -17,13 +17,13 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "vitest",
-    "test:run": "vitest run",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test:run"
+    "prepublishOnly": "pnpm run lint && pnpm run build && pnpm run test"
   },
   "keywords": [
     "cli",

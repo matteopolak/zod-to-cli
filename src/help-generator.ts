@@ -158,7 +158,7 @@ export class HelpGenerator {
         type = 'array';
       }
 
-      if (meta?.count && type === 'boolean') {
+      if (meta?.count && type === 'number') {
         type = 'count';
         count = true;
       }

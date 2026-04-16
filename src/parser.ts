@@ -306,7 +306,7 @@ export class Parser {
         type = 'array';
       }
 
-      if (meta?.count && type === 'boolean') {
+      if (meta?.count && type === 'number') {
         type = 'count';
         count = true;
       }
@@ -347,9 +347,28 @@ export class Parser {
       }
 
       // Handle counting flags
-      if (def.count && typeof value === 'boolean') {
-        value = value ? 1 : 0;
-      } else if (def.count && typeof value === 'number') {
+      if (def.count) {
+        if (typeof value === 'boolean') {
+          value = value ? 1 : 0;
+        } else if (Array.isArray(value)) {
+          // Flatten nested arrays and count all boolean values
+          const flattenAndCount = (arr: unknown[]): number => {
+            let count = 0;
+            for (const item of arr) {
+              if (Array.isArray(item)) {
+                count += flattenAndCount(item);
+              } else if (typeof item === 'boolean' && item) {
+                count += 1;
+              } else if (typeof item === 'number') {
+                count += item;
+              }
+            }
+            return count;
+          };
+          value = flattenAndCount(value);
+        } else if (typeof value !== 'number') {
+          value = 0;
+        }
       } else if (def.type === 'array') {
         if (!Array.isArray(value)) {
           value = value !== undefined ? [value] : [];
@@ -371,17 +390,35 @@ export class Parser {
   }
 
   private findFlagValue(flags: Map<string, unknown>, def: FlagDefinition): unknown {
+    const values: unknown[] = [];
+
     if (flags.has(def.name)) {
-      return flags.get(def.name);
+      const val = flags.get(def.name);
+      if (Array.isArray(val)) {
+        values.push(...(val as unknown[]));
+      } else {
+        values.push(val);
+      }
     }
 
     for (const alias of def.aliases) {
       if (flags.has(alias)) {
-        return flags.get(alias);
+        const val = flags.get(alias);
+        if (Array.isArray(val)) {
+          values.push(...(val as unknown[]));
+        } else {
+          values.push(val);
+        }
       }
     }
 
-    return undefined;
+    if (values.length === 0) {
+      return undefined;
+    }
+    if (values.length === 1) {
+      return values[0];
+    }
+    return values;
   }
 
   private showHelp(): void {
