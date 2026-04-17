@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/matteopolak/zod-to-cli/compare/v0.2.1...v0.2.2) (2026-04-17)
+
+
+### Bug Fixes
+
+* use proper tsconfig options ([92c657f](https://github.com/matteopolak/zod-to-cli/commit/92c657fe6440e848ea6910946205a0d9db0a2a39))
+
 ## [0.2.1](https://github.com/matteopolak/zod-to-cli/compare/v0.2.0...v0.2.1) (2026-04-16)
 
 
